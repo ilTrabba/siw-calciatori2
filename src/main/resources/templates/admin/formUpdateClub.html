@@ -27,13 +27,14 @@
   </div>
 </nav>
 <div class="content">
-  <h1>Possible Clubs:</h1>
+  <h1>Possible clubs:</h1>
   <div th:unless="${choices.isEmpty()}" class="clubs">
     <ul th:each="club: ${choices}">
       <div class="card">
         <a th:href="@{'/admin/manage/setClub/' + ${player.id} + '/' + ${club.id}}">
+          <!--<img th:src="@{'data:image/*;base64,'+${artist.profilePicture.base64Image}}">-->
           <img th:src="@{'/display/image/' + ${club.logo.id}}">
-          <div class="club-info">
+          <div class="club">
             <h4 th:text="${club.name + ' (' + club.foundationYear + ')'}">.</h4>
           </div>
         </a>

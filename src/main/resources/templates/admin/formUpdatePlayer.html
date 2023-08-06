@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>siw-calciatori2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/updatePlayer.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+
+<body>
+<nav>
+  <h2 class="logo">SiwCalciatori</h2>
+  <ul>
+    <li><a href="/" class="sub">Home</a></li>
+    <li><a href="/players" class="sub">Players</a></li>
+    <li><a href="/clubs" class="sub">Clubs</a></li>
+  </ul>
+  <div th:if="${userDetails}">
+    <b th:text="${userDetails.username}" class="username"></b>
+    <button type="button"><a href="/logout" class="log">Logout</a></button>
+  </div>
+  <div th:unless="${userDetails}">
+    <button type="button"><a href="/login" class="log">Login</a></button>
+  </div>
+</nav>
+<div th:if="${player}" class="content">
+  <div class="player-content">
+    <h1 th:text="${player.name + ',' + player.surname}">Francesco Totti</h1>
+    <button type="button">
+      <a th:href="'/players/'+${player.id}" class="log">Go back to Player</a>
+    </button>
+    <div class="player-clubs">
+      <div class="label">
+        <div class="main-label">
+          <h3>Club:</h3>
+          <button type="button">
+            <a th:href="'/admin/manage/updateClub/'+${player.id}" class="log">Update</a>
+          </button>
+        </div>
+        <div th:if="${club}" class="club-content">
+          <div class="card">
+            <a th:href="@{'/clubs' + '/' + ${club.id}}">
+              <!--<img th:src="@{'data:image/*;base64,'+${director.profilePicture.base64Image}}">-->
+              <img th:src="@{'/display/image/' + ${club.logo.id}}">
+              <div class="card-overlay">
+                <button class="overlay-button">
+                  <a th:href="@{'/admin/manage/removeClub/' + ${player.id} + '/' + ${club.id}}" class="log">
+                    remove
+                  </a>
+                </button>
+              </div>
+              <div class="club-info">
+                <h4 th:text="${club.name + ' ' + club.foundationYear}">.</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div th:unless="${club}" class="club-content">
+          <h4>Nessun club</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>siw-calciatori2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/formAdd.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+
+<body>
+<nav>
+  <h2 class="logo">SiwCalciatori</h2>
+  <ul>
+    <li><a href="/" class="sub">Home</a></li>
+    <li><a href="/players" class="sub">Players</a></li>
+    <li><a href="/clubs" class="sub">Clubs</a></li>
+  </ul>
+  <div th:if="${userDetails}">
+    <b th:text="${userDetails.username}" class="username"></b>
+    <button type="button"><a href="/logout" class="log">Logout</a></button>
+  </div>
+  <div th:unless="${userDetails}">
+    <button type="button"><a href="/login" class="log">Login</a></button>
+  </div>
+</nav>
+<section>
+  <div class="form-box">
+    <div class="form-value">
+      <form th:action="@{/admin/uploadPlayer}" method="post" enctype="multipart/form-data" th:object="${player}" class="form">
+        <span class="title">New PLayer</span>
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+
+        <input required type="text" th:field="${player.name}" placeholder="Name" class="form--input">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+        <input required type="text" th:field="${player.nickName}" placeholder="nickName" class="form--input">
+        <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></span>
+
+        <input required type="text" th:field="${player.surname}" placeholder="Surname" class="form--input">
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+
+        <input required type="date" th:field="${player.birthDate}" placeholder="Birth Date" class="form--input">
+        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
+
+        <input required type="text" th:field="${player.description}" maxlength="200" placeholder="Description" class="form--input">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+
+        <span><input required type="file" name="file"></span>
+        <button type="submit" class="cssbuttons-io-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+          <span>Add Player</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>siw-calciatori2</title>
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/indexAdmin.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+
+<body>
+<nav>
+  <h2 class="logo">SiwCalciatori</h2>
+  <ul>
+    <li><a href="/players" class="sub">Players</a></li>
+    <li><a href="/clubs" class="sub">Clubs</a></li>
+  </ul>
+  <div th:if="${userDetails}">
+    <b th:text="${userDetails.username}" class="username"></b>
+    <button type="button"><a href="/logout" class="log">Logout</a></button>
+  </div>
+  <div th:unless="${userDetails}">
+    <button><a href="/login" class="log">Login</a></button>
+  </div>
+</nav>
+<div class="admin-form">
+  <div class="operations-menu">
+    <h1 class="title">Operazioni Admin</h1>
+    <div class="sub-operation-form">
+      <h1>Operazioni Giocatori</h1>
+      <ul>
+        <button class="option"><a href="/admin/formNewPlayer" class="log">Aggiungi giocatore</a></button>
+        <!--
+            <button class="option"><a href="/admin/updateMovie" class="log">Aggiorna film</a></button>
+        -->
+      </ul>
+    </div>
+    <div class="sub-operation-form">
+      <h1>Operazioni Squadre</h1>
+      <ul>
+        <button class="option"><a href="/admin/formNewClub" class="log">Aggiungi squadra</a></button>
+        <!--
+            <button class="option"><a href="/admin/updateArtist" class="log">Aggiorna artista</a></button>
+        -->
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
