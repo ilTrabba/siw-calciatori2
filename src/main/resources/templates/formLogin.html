@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>siw-calciatori2</title>
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/loginPage.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+<nav>
+  <h2 class="logo">SiwCalciatori<span class="vendetta"> Vendetta</span></h2>
+</nav>
+<section>
+  <div class="form-box">
+    <div class="form-value">
+      <form th:action="@{/login}" method="post" class="form">
+        <div class="image">
+          <img src="/images/logo-siw.png">
+        </div>
+        <span class="login">Log In</span>
+        <input type="text" name="username" placeholder="Username" class="form--input">
+        <input type="password" name="password" placeholder="Password" class="form--input">
+        <span th:if="${param.error != null}">Username o password errati</span>
+        <button type="submit" class="form--submit">
+          Login
+        </button>
+        <button class="form--submit">
+          <a href="/register" id="register">Register</a>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

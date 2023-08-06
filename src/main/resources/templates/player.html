@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Siw-calciatori2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/player.css">
+  <link rel="icon" href="/images/favicon.ico">
+</head>
+
+<body>
+<nav>
+  <h2 class="logo">SiwCalciatori<span class="vendetta"> Vendetta</span></h2>
+  <ul>
+    <li><a href="/" class="sub">Home</a></li>
+    <li><a href="/players" class="sub">Players</a></li>
+    <li><a href="/clubs" class="sub">Clubs</a></li>
+  </ul>
+  <div th:if="${userDetails}">
+    <b th:text="${userDetails.username}" class="username"></b>
+    <button type="button"><a href="/logout" class="log">Logout</a></button>
+  </div>
+  <div th:unless="${userDetails}">
+    <button type="button"><a href="/login" class="log">Login</a></button>
+  </div>
+</nav>
+<div th:if="${player}" class="content">
+  <div class="card">
+    <img th:src="@{'/display/image/' + ${player.foto.id}}">
+    <!--<img th:src="@{'data:image/*;base64,'+${player.image.base64Image}}">-->
+  </div>
+  <div class="player-content">
+    <h1 th:text="${player.name}">Player Name</h1>
+    <p th:text="${player.year}">Player Year Of Birth</p>
+    <button th:if="${role != null && role == 'ADMIN'}" class="update-player">
+      <a th:href="'/admin/manage/' + ${player.id}" class="log">Update Player</a>
+    </button>
+    <div class="player-clubs-content">
+      <h1>Cast:</h1>
+      <div th:if="${playerClubs.isEmpty()}">
+        None
+      </div>
+      <div th:unless="${playerClubs.isEmpty()}">
+
+        <div class="clubs">
+          <ul th:each="club : ${playerClubs}">
+            <div class="cards">
+              <a th:href="@{'/clubs' + '/' + ${club.id}}">
+                <!--<img th:src="@{'data:image/*;base64,'+${club.logo.base64Image}}">-->
+                <img th:src="@{'/display/image/' + ${artist.logo.id}}">
+                <div class="club-info">
+                  <h4 th:text="${club.name}">.</h4>
+                </div>
+              </a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="player-review-content">
+  <div class="personal-review" th:unless="${hasComment}">
+    <form th:action="@{'/user/uploadReview/' + ${player.id}}" method="post" th:object="${review}" class="form">
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+      </div>
+      <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">
+      <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+      <input required type="text" placeholder="Text" name="text" th:field="${review.text}" class="form--input2">
+      <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+      <div class="review-options">
+        <input required type="number" min="1" max="5" name="rating" th:field="${review.rating}" id="animated-input">
+        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+        <button class="comment-button" type="submit">Commenta</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div>
+  <div th:if="${reviews}">
+    <div th:unless="${reviews.isEmpty()}" class="other-review">
+      <h1 style="padding-top: 2%; font-size: 40px;">Recensioni</h1>
+      <ul th:each="rev : ${reviews}">
+        <div class="review">
+          <div class="header">
+            <h1 th:text="${rev.title}">.</h1>
+            <h1 th:text="${rev.author}">.</h1>
+          </div>
+          <p th:text="${rev.text}">.</p>
+          <div class="bottom-label">
+            <p th:text="'Rating: ' + ${rev.rating}">.</p>
+            <button th:if="${role != null && role == 'ADMIN'}" class="delete-review">
+              <a th:href="'/admin/deleteReview/' + ${movie.id} + '/' + ${rev.id}" class="log">
+                Delete
+              </a>
+            </button>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  const input = document.getElementById('animated-input');
+
+  input.addEventListener('input', function () {
+    if (input.checkValidity()) {
+      input.classList.remove('animated');
+    } else {
+      input.classList.add('animated');
+    }
+  });
+</script>
+</body>
+
+</html>
