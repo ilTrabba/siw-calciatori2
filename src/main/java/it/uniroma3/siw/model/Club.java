@@ -28,7 +28,7 @@ public class Club {
     private Image logo;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Player> starredRomaPlayer;
+    private Set<Player> starredRomaPlayers;
 
     public Long getId() {
         return id;
@@ -62,12 +62,12 @@ public class Club {
         this.logo = logo;
     }
 
-    public Set<Player> getStarredRomaPlayer() {
-        return starredRomaPlayer;
+    public Set<Player> getStarredRomaPlayers() {
+        return starredRomaPlayers;
     }
 
-    public void setStarredRomaPlayer(Set<Player> starredRomaPlayer) {
-        this.starredRomaPlayer = starredRomaPlayer;
+    public void setStarredRomaPlayers(Set<Player> starredRomaPlayers) {
+        this.starredRomaPlayers = starredRomaPlayers;
     }
 
     @Override

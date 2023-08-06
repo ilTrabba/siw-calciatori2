@@ -34,6 +34,8 @@ public class Player {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
+    private Integer year;
+
     @OneToOne
     Image foto;
 
@@ -93,6 +95,10 @@ public class Player {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Integer getYear(){
+        return this.birthDate.getYear();
     }
 
     public Image getFoto() {
