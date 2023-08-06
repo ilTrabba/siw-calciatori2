@@ -45,7 +45,7 @@ public class Player {
     @ManyToMany
     private Set<Club> clubs;
 
-    @OneToMany
+    @OneToMany (mappedBy = "reviewedPlayer",cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
     public Long getId() {

@@ -27,7 +27,7 @@ public class Club {
     @OneToOne
     private Image logo;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy="clubs",fetch = FetchType.LAZY)
     private Set<Player> starredRomaPlayers;
 
     public Long getId() {
