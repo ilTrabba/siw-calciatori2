@@ -10,6 +10,8 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
 
     public boolean existsByNameAndBirthDate(String name, LocalDate birthDate);
 
+    public boolean existsByNameAndSurnameAndBirthDate(String name, String surname, LocalDate birthDate);
+
     public List<Player> findByName(String name);
 
     public List<Player> findByNameAndSurname(String name, String surname);

@@ -1,7 +1,7 @@
 package it.uniroma3.siw.controller;
 
 
-import it.uniroma3.siw.controller.validator.MovieValidator;
+import it.uniroma3.siw.controller.validator.PlayerValidator;
 import it.uniroma3.siw.model.Club;
 import it.uniroma3.siw.model.Player;
 import it.uniroma3.siw.repository.ClubRepository;

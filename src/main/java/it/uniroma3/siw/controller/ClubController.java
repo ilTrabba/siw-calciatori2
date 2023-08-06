@@ -1,7 +1,7 @@
 package it.uniroma3.siw.controller;
 
 
-import it.uniroma3.siw.controller.validator.ArtistValidator;
+import it.uniroma3.siw.controller.validator.ClubValidator;
 import it.uniroma3.siw.model.Club;
 import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.ClubRepository;
