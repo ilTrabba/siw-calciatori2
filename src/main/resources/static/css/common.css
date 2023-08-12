@@ -65,9 +65,11 @@ nav ul li .sub:hover {
 }
 
 button {
+    /*
     position: absolute;
     right: 20px;
     top: 40px;
+     */
 
     border: none;
     /*background: #f0bc42;*/
@@ -91,8 +93,15 @@ button:hover {
     padding-right: 10px;
 }
 
+#lo{
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+
 .log {
     text-decoration: none;
+    color: #8e1f2f;
 }
 
 .log:visited {
