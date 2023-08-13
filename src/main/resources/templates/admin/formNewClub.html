@@ -34,10 +34,10 @@
         </div>
 
         <input required type="text" th:field="${club.name}" placeholder="Name" class="form--input">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{club.name}"></span>
 
         <input required type="integer" th:field="${club.foundationYear}" placeholder="Foundation Year" class="form--input">
-        <span th:if="${#fields.hasErrors('foundationYear')}" th:errors="*{foundationYear}"></span>
+        <span th:if="${#fields.hasErrors('foundationYear')}" th:errors="*{club.foundationYear}"></span>
 
         <span><input required type="file" name="file"></span>
         <button type="submit" class="cssbuttons-io-button">

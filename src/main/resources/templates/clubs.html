@@ -41,7 +41,7 @@
         <div class="card">
           <a th:href="@{'/clubs' + '/' + ${club.id}}">
             <!--<img th:src="@{'data:image/*;base64,'+${club.profilePicture.base64Image}}">-->
-            <img th:src="@{'/display/image/' + ${club.profilePicture.id}}">
+            <img th:src="@{'/display/image/' + ${club.logo.id}}">
             <div class="club-info">
               <h4 th:text="${club.name + ' ' + club.foundationYear}">.</h4>
             </div>

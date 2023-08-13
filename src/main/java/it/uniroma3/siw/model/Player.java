@@ -20,7 +20,6 @@ public class Player {
 
     @NotBlank
     private String name;
-
     @NotBlank
     private String surname;
 

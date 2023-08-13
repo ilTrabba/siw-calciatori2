@@ -11,7 +11,8 @@
 
 <body>
 <nav>
-  <h2 class="logo">SiwCalciatori</h2>
+  <img src="/images/lupetto.jpg">
+  <h2 class="logo">Eroi AS Roma</h2>
   <ul>
     <li><a href="/" class="sub">Home</a></li>
     <li><a href="/players" class="sub">Players</a></li>
@@ -25,6 +26,8 @@
     <button type="button"><a href="/login" class="log">Login</a></button>
   </div>
 </nav>
+<header></header>
+<footer></footer>
 <section>
   <div class="form-box">
     <div class="form-value">
@@ -35,19 +38,19 @@
         </div>
 
         <input required type="text" th:field="${player.name}" placeholder="Name" class="form--input">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{player.name}"></span>
 
         <input required type="text" th:field="${player.nickName}" placeholder="nickName" class="form--input">
-        <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></span>
+        <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{player.nickName}"></span>
 
         <input required type="text" th:field="${player.surname}" placeholder="Surname" class="form--input">
-        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{player.surname}"></span>
 
         <input required type="date" th:field="${player.birthDate}" placeholder="Birth Date" class="form--input">
-        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
+        <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{player.birthDate}"></span>
 
         <input required type="text" th:field="${player.description}" maxlength="200" placeholder="Description" class="form--input">
-        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{player.description}"></span>
 
         <span><input required type="file" name="file"></span>
         <button type="submit" class="cssbuttons-io-button">
