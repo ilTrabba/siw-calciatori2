@@ -38,18 +38,18 @@
       <a th:href="'/admin/manage/' + ${player.id}" class="log">Update Player</a>
     </button>
     <div class="player-clubs-content">
-      <h1>Cast:</h1>
-      <div th:if="${playerClubs.isEmpty()}">
+      <h1>Clubs:</h1>
+      <div th:if="${player.clubs.isEmpty()}">
         None
       </div>
-      <div th:unless="${playerClubs.isEmpty()}">
+      <div th:unless="${player.clubs.isEmpty()}">
 
         <div class="clubs">
-          <ul th:each="club : ${playerClubs}">
+          <ul th:each="club : ${player.clubs}">
             <div class="cards">
               <a th:href="@{'/clubs' + '/' + ${club.id}}">
                 <!--<img th:src="@{'data:image/*;base64,'+${club.logo.base64Image}}">-->
-                <img th:src="@{'/display/image/' + ${artist.logo.id}}">
+                <img th:src="@{'/display/image/' + ${club.logo.id}}">
                 <div class="club-info">
                   <h4 th:text="${club.name}">.</h4>
                 </div>
@@ -68,7 +68,7 @@
         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
       </div>
       <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">
-      <span th:if="${#fields.hasErrors('name')}" th:errors="*{player.name}"></span>
+      <span th:if="${#fields.hasErrors('title')}" th:errors="*{review.title}"></span>
       <input required type="text" placeholder="Text" name="text" th:field="${review.text}" class="form--input2">
       <span th:if="${#fields.hasErrors('text')}" th:errors="*{review.text}"></span>
       <div class="review-options">
