@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<header></header>
 <nav>
   <img src="/images/lupetto.jpg">
   <h2 class="logo">Eroi AS Roma</h2>
@@ -27,9 +28,10 @@
     <button type="button"><a href="/login" class="log">Login</a></button>
   </div>
 </nav>
+<footer></footer>
 <div th:if="${player}" class="content">
   <div class="player-content">
-    <h1 th:text="${player.name + ',' + player.surname}">Francesco Totti</h1>
+    <h1 th:text="${player.name + ' ' + player.surname}">Francesco Totti</h1>
     <button type="button">
       <a th:href="'/players/'+${player.id}" class="log">Go back to Player</a>
     </button>
@@ -41,26 +43,30 @@
             <a th:href="'/admin/manage/addClub/'+${player.id}" class="log">Update</a>
           </button>
         </div>
-        <div th:if="${club}" class="club-content">
-          <div class="card">
-            <a th:href="@{'/clubs' + '/' + ${club.id}}">
-              <!--<img th:src="@{'data:image/*;base64,'+${director.profilePicture.base64Image}}">-->
-              <img th:src="@{'/display/image/' + ${club.logo.id}}">
-              <div class="card-overlay">
-                <button class="overlay-button">
-                  <a th:href="@{'/admin/manage/removeClub/' + ${player.id} + '/' + ${club.id}}" class="log">
-                    remove
-                  </a>
-                </button>
-              </div>
-              <div class="club-info">
-                <h4 th:text="${club.name + ' ' + club.foundationYear}">.</h4>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div th:unless="${club}" class="club-content">
+        <div th:if="${clubs.isEmpty()}" class="clubs-content">
           <h4>Nessun club</h4>
+        </div>
+        <div th:unless="${clubs.isEmpty()}" class="club-content">
+          <div class="clubs">
+            <ul th:each="club: ${clubs}">
+              <div class="card">
+                <a th:href="@{'/clubs' + '/' + ${club.id}}">
+                  <!--<img th:src="@{'data:image/*;base64,'+${director.profilePicture.base64Image}}">-->
+                  <img th:src="@{'/display/image/' + ${club.logo.id}}">
+                  <div class="card-overlay">
+                    <button class="overlay-button">
+                      <a th:href="@{'/admin/manage/removeClub/' + ${player.id} + '/' + ${club.id}}" class="log">
+                        remove
+                      </a>
+                    </button>
+                  </div>
+                  <div class="club-info">
+                    <h4 th:text="${club.name + ' ' + club.foundationYear}">.</h4>
+                  </div>
+                </a>
+              </div>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -38,8 +38,8 @@ public class Player {
     @OneToOne
     Image foto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Club club;
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    private Club club;*/
 
     @ManyToMany
     private Set<Club> clubs;
@@ -106,14 +106,6 @@ public class Player {
 
     public void setFoto(Image foto) {
         this.foto = foto;
-    }
-
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
     }
 
     public Set<Club> getClubs() {
