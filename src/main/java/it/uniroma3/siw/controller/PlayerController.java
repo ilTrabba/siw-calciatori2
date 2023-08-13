@@ -49,15 +49,15 @@ public class PlayerController {
              * for(MultipartFile image : images){
              * Image picture = new Image(image.getBytes());
              * this.imageRepository.save(picture);
-             * movieImgs.add(picture);
+             * playerImgs.add(picture);
              * }
              */
             /*
-             * Image movieImg = new Image(image.getBytes());
-             * this.imageRepository.save(movieImg);
+             * Image playerImg = new Image(image.getBytes());
+             * this.imageRepository.save(playerImg);
              *
-             * movie.setImage(movieImg);
-             * this.movieRepository.save(movie);
+             * player.setImage(playerImg);
+             * this.playerRepository.save(player);
              */
 
             this.playerService.createPlayer(player, image);

@@ -68,12 +68,12 @@
         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
       </div>
       <input required type="text" placeholder="Title" name="title" th:field="${review.title}" class="form--input1">
-      <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{player.name}"></span>
       <input required type="text" placeholder="Text" name="text" th:field="${review.text}" class="form--input2">
-      <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+      <span th:if="${#fields.hasErrors('text')}" th:errors="*{review.text}"></span>
       <div class="review-options">
         <input required type="number" min="1" max="5" name="rating" th:field="${review.rating}" id="animated-input">
-        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{review.rating}"></span>
         <button class="comment-button" type="submit">Commenta</button>
       </div>
     </form>
