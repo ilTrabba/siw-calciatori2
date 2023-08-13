@@ -40,8 +40,8 @@
         <input required type="text" th:field="${player.name}" placeholder="Name" class="form--input">
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{player.name}"></span>
 
-        <input required type="text" th:field="${player.nickName}" placeholder="nickName" class="form--input">
-        <span th:if="${#fields.hasErrors('nickName')}" th:errors="*{player.nickName}"></span>
+        <input required type="text" th:field="${player.nickname}" placeholder="nickname" class="form--input">
+        <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{player.nickname}"></span>
 
         <input required type="text" th:field="${player.surname}" placeholder="Surname" class="form--input">
         <span th:if="${#fields.hasErrors('surname')}" th:errors="*{player.surname}"></span>
