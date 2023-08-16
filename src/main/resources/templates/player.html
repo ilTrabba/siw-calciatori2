@@ -35,30 +35,32 @@
     <!--<img th:src="@{'data:image/*;base64,'+${player.image.base64Image}}">-->
   </div>
   <div class="player-content">
-    <h1 th:text="${player.name}">Player Name</h1>
+    <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname}">Francesco Totti, detto ER PUPONE</h1>
     <p th:text="${player.year}">Player Year Of Birth</p>
     <button th:if="${role != null && role == 'ADMIN'}" class="update-player">
       <a th:href="'/admin/manage/' + ${player.id}" class="log">Update Player</a>
     </button>
     <div class="player-clubs-content">
       <h1>Clubs:</h1>
-      <div th:if="${player.clubs.isEmpty()}">
-        None
-      </div>
-      <div th:unless="${player.clubs.isEmpty()}">
+      <div th:if="${player.clubs}">
+        <div th:if="${player.clubs.isEmpty()}">
+          Nessun club oltre alla Roma nella carriera di questo eroe.
+        </div>
+        <div th:unless="${player.clubs.isEmpty()}">
 
-        <div class="clubs">
-          <ul th:each="club : ${player.clubs}">
-            <div class="cards">
-              <a th:href="@{'/clubs' + '/' + ${club.id}}">
-                <!--<img th:src="@{'data:image/*;base64,'+${club.logo.base64Image}}">-->
-                <img th:src="@{'/display/image/' + ${club.logo.id}}">
-                <div class="club-info">
-                  <h4 th:text="${club.name}">.</h4>
-                </div>
-              </a>
-            </div>
-          </ul>
+          <div class="clubs">
+            <ul th:each="club : ${player.clubs}">
+              <div class="cards">
+                <a th:href="@{'/clubs' + '/' + ${club.id}}">
+                  <!--<img th:src="@{'data:image/*;base64,'+${club.logo.base64Image}}">-->
+                  <img th:src="@{'/display/image/' + ${club.logo.id}}">
+                  <div class="club-info">
+                    <h4 th:text="${club.name}">.</h4>
+                  </div>
+                </a>
+              </div>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

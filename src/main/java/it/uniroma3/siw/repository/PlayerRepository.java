@@ -14,6 +14,8 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
 
     public List<Player> findByName(String name);
 
+    public List<Player> findBySurname(String surname);
+
     public List<Player> findByNameAndSurname(String name, String surname);
 
     public List<Player> findByBirthDate(LocalDate birthDate);

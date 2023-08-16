@@ -2,6 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,12 +42,17 @@ public class PlayerService {
         this.playerRepository.save(player);
     }
 
-    @Transactional
+   /* @Transactional
     public List<Player> getSearchedPlayers(String name) {
         return this.playerRepository.findByName(name);
+    }*/
+
+    @Transactional
+    public List<Player> getSearchedPlayers(String s) {
+        List<Player> result = this.playerRepository.findByName(s);
+        result.addAll(this.playerRepository.findBySurname(s));
+        return result;
     }
-
-
 
     @Transactional
     public void setClubToPlayer(Player player, Long clubId) {

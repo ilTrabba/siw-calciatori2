@@ -92,7 +92,7 @@ public class PlayerController {
         } else {
             model.addAttribute("players", this.playerService.getSearchedPlayers(name));
         }
-        return "player.html";
+        return "players.html";
     }
 
     @GetMapping("/admin/manage/{playerId}")
