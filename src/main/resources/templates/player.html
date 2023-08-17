@@ -20,9 +20,11 @@
     <li><a href="/players" class="sub">Players</a></li>
     <li><a href="/clubs" class="sub">Clubs</a></li>
   </ul>
-  <div th:if="${userDetails}">
-    <b th:text="${userDetails.username}" class="username"></b>
-    <button type="button"><a href="/logout" class="log">Logout</a></button>
+  <div id="lo">
+    <div th:if="${userDetails}">
+      <b th:text="${userDetails.username}" class="username"></b>
+      <button type="button"><a href="/logout" class="log">Logout</a></button>
+    </div>
   </div>
   <div th:unless="${userDetails}">
     <button type="button"><a href="/login" class="log">Login</a></button>
