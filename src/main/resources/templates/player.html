@@ -100,7 +100,7 @@
           <div class="bottom-label">
             <p th:text="'Rating: ' + ${rev.rating}">.</p>
             <button th:if="${role != null && role == 'ADMIN'}" class="delete-review">
-              <a th:href="'/admin/deleteReview/' + ${movie.id} + '/' + ${rev.id}" class="log">
+              <a th:href="'/admin/deleteReview/' + ${player.id} + '/' + ${rev.id}" class="log">
                 Delete
               </a>
             </button>
