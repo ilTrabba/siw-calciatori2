@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class Review {
@@ -66,6 +67,14 @@ public class Review {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Player getReviewedPlayer() {
+        return reviewedPlayer;
+    }
+
+    public void setReviewedPlayer(Player reviewedPlayer) {
+        this.reviewedPlayer = reviewedPlayer;
     }
 
     @Override

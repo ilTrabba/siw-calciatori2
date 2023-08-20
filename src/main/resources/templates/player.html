@@ -87,10 +87,13 @@
   </div>
 </div>
 <div>
-  <div th:if="${reviews}">
-    <div th:unless="${reviews.isEmpty()}" class="other-review">
+  <div th:if="${player.reviews}">
+    <div th:if="${player.reviews.isEmpty()}">
+      <p>non ci sono review sul giocatore</p>
+    </div>
+    <div th:unless="${player.reviews.isEmpty()}" class="other-review">
       <h1 style="padding-top: 2%; font-size: 40px;">Recensioni</h1>
-      <ul th:each="rev : ${reviews}">
+      <ul th:each="rev : ${player.reviews}">
         <div class="review">
           <div class="header">
             <h1 th:text="${rev.title}">.</h1>

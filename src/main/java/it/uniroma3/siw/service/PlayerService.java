@@ -85,10 +85,13 @@ public class PlayerService {
         model.addAttribute("player", player);
         if(user != null && this.alreadyReviewed(player.getReviews(),user.getUsername()))
             model.addAttribute("hasComment", true);
-        else
+        else {
             model.addAttribute("hasComment", false);
+        }
         model.addAttribute("review", new Review());
         model.addAttribute("reviews", player.getReviews());
+
+
         return "player.html";
     }
 

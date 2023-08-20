@@ -37,13 +37,16 @@ public class ReviewController {
         if(!bindingResult.hasErrors()){
             if(this.globalController.getUser() != null && !player.getReviews().contains(review)){
                 review.setAuthor(this.globalController.getUser().getUsername());
+                review.setReviewedPlayer(playerRepository.findById(id).orElse(null));
                 this.reviewRepository.save(review);
                 player.getReviews().add(review);
+
             }
         }
         this.playerRepository.save(player);
 
         return this.playerService.function(model, player, this.globalController.getUser());
+
     }
 
     @GetMapping("/admin/deleteReview/{playerId}/{reviewId}")
