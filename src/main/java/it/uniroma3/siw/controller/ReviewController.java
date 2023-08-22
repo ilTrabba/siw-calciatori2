@@ -90,9 +90,6 @@ public class ReviewController {
             }
         }
 
-        // Other logic to retrieve player and user, and return the response
-        // ...
-
         Player player = this.playerRepository.findById(playerId).orElse(null);
         return this.playerService.function(model, player, this.globalController.getUser());
     }
