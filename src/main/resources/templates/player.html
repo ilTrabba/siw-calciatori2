@@ -103,6 +103,11 @@
           <p th:text="${rev.text}">.</p>
           <div class="bottom-label">
             <p th:text="'Rating: ' + ${rev.rating}">.</p>
+            <button th:if="${rev.author == userDetails.username}" class="update-review">
+              <a th:href="'/user/modifyingReview/' + ${player.id} + '/' + ${rev.id}" class="log">
+                Modifica
+              </a>
+            </button>
             <button th:if="${role != null && role == 'ADMIN'}" class="delete-review">
               <a th:href="'/admin/deleteReview/' + ${player.id} + '/' + ${rev.id}" class="log">
                 Delete

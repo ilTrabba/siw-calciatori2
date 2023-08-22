@@ -54,7 +54,7 @@
             <ul th:each="club: ${clubs}">
               <div class="card">
                 <a th:href="@{'/clubs' + '/' + ${club.id}}">
-                  <!--<img th:src="@{'data:image/*;base64,'+${director.profilePicture.base64Image}}">-->
+
                   <img th:src="@{'/display/image/' + ${club.logo.id}}">
                   <div class="card-overlay">
                     <button class="overlay-button">

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Siw-calciatori2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initials-scale=1.0">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/player.css">
+  <link rel="icon" href="/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet">
+</head>
+
+<body>
+<header></header>
+<nav>
+  <img src="/images/lupetto.jpg">
+  <h2 class="logo">Eroi AS Roma</h2>
+  <ul>
+    <li><a href="/" class="sub">Home</a></li>
+    <li><a href="/players" class="sub">Players</a></li>
+    <li><a href="/clubs" class="sub">Clubs</a></li>
+  </ul>
+  <div id="lo">
+    <div th:if="${userDetails}">
+      <b th:text="${userDetails.username}" class="username"></b>
+      <button type="button"><a href="/logout" class="log">Logout</a></button>
+    </div>
+    <div th:unless="${userDetails}">
+      <button type="button"><a href="/login" class="log">Login</a></button>
+    </div>
+  </div>
+</nav>
+<footer></footer>
+<div class="player-review-content">
+  <div class="personal-review" th:if="${review}">
+    <form th:action="@{'/user/updateReview/' + ${player.id} + '/' + ${review.id}}" method="post" th:object="${review}" class="form">
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+      </div>
+      <input required type="text" placeholder="title" name="title" th:field="${review.title}" th:value="${review.title != null ? review.title : ''}" class="form--input1">
+      <span th:if="${#fields.hasErrors('title')}" th:errors="*{review.title}"></span>
+      <input required type="text" placeholder="Text" name="text" th:field="${review.text}" th:value="${review.text != null ? review.text : ''}" class="form--input2">
+      <span th:if="${#fields.hasErrors('text')}" th:errors="*{review.text}"></span>
+      <div class="review-options">
+        <input required type="number" min="1" max="5" name="rating" th:field="${review.rating}" id="animated-input">
+        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{review.rating}"></span>
+        <button class="comment-button" type="submit">Commenta</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  const input = document.getElementById('animated-input');
+
+  input.addEventListener('input', function () {
+    if (input.checkValidity()) {
+      input.classList.remove('animated');
+    } else {
+      input.classList.add('animated');
+    }
+  });
+</script>
+</body>
+
+</html>

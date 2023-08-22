@@ -4,6 +4,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.controller.validator.ReviewValidator;
 import it.uniroma3.siw.model.Player;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.PlayerRepository;
 import it.uniroma3.siw.repository.ReviewRepository;
 import it.uniroma3.siw.service.PlayerService;
@@ -59,4 +60,41 @@ public class ReviewController {
         this.playerRepository.save(player);
         return this.playerService.function(model, player, this.globalController.getUser());
     }
+
+    @GetMapping("/user/modifyingReview/{playerId}/{reviewId}")
+    public String updateReview(Model model, @PathVariable("playerId") Long playerId,@PathVariable("reviewId") Long reviewId){
+        Player player = this.playerRepository.findById(playerId).get();
+        Review review = this.reviewRepository.findById(reviewId).get();
+
+        model.addAttribute("review", review);
+        model.addAttribute("player", player);
+        model.addAttribute("username", this.globalController.getUser().getUsername());
+
+        return "formUpdateReview.html";
+    }
+
+    @PostMapping("/user/updateReview/{playerId}/{reviewId}")
+    public String updateReview(Model model, @Valid @ModelAttribute("review") Review updatedReview, BindingResult bindingResult,@PathVariable("playerId") Long playerId, @PathVariable("reviewId") Long reviewId) {
+        this.reviewValidator.validate(updatedReview, bindingResult);
+
+        if (!bindingResult.hasErrors()) {
+            Review existingReview = this.reviewRepository.findById(reviewId).orElse(null);
+
+            if (existingReview != null) {
+                existingReview.setTitle(updatedReview.getTitle());
+                existingReview.setText(updatedReview.getText());
+                existingReview.setRating(updatedReview.getRating());
+
+                this.reviewRepository.save(existingReview);
+
+            }
+        }
+
+        // Other logic to retrieve player and user, and return the response
+        // ...
+
+        Player player = this.playerRepository.findById(playerId).orElse(null);
+        return this.playerService.function(model, player, this.globalController.getUser());
+    }
+
 }

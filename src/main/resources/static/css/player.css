@@ -202,3 +202,7 @@
 .delete-review {
     background: red;
 }
+
+.update-review {
+    background: orange;
+}
