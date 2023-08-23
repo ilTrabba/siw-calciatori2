@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initials-scale=1.0">
   <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/players.css">
+
   <link rel="icon" href="/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet">
 </head>
@@ -38,22 +39,31 @@
       <input placeholder="Search" type="text" th:value="${name}" id="name" name="name" class="input">
     </form>
   </div>
-  <div th:if="${players.isEmpty()}">
-    Non ci sono giocatori nel sistema
-  </div>
-  <div th:unless="${players.isEmpty()}">
-    <div class="players">
-      <ul th:each="player: ${players}">
-        <div class="card">
-          <a th:href="@{'/players' + '/' + ${player.id}}">
-            <img th:src="@{'/display/image/' + ${player.foto.id}}">
-            <!--<img th:src="@{'data:image/*;base64,'+${player.foto.base64Image}}">-->
-            <div class="player-info">
-              <h4 th:text="${player.name + ' ' + player.surname + ',' + player.year}">.</h4>
-            </div>
-          </a>
-        </div>
-      </ul>
+  <div th:if="${players}">
+    <div th:if="${players.isEmpty()}">
+      Non ci sono giocatori nel sistema
+    </div>
+    <div th:unless="${players.isEmpty()}">
+      <div class="players">
+        <ul th:each="player: ${players}">
+          <div class="card">
+            <a th:href="@{'/players' + '/' + ${player.id}}">
+              <img th:src="@{'/display/image/' + ${player.foto.id}}">
+              <div class="card-overlay">
+                <button class="overlay-button">
+                  <a th:href="@{'/admin/deletePlayer/' + ${player.id} }" class="log">
+                    remove
+                  </a>
+                </button>
+              </div>
+              <!--<img th:src="@{'data:image/*;base64,'+${player.foto.base64Image}}">-->
+              <div class="player-info">
+                <h4 th:text="${player.name + ' ' + player.surname + ',' + player.year}">.</h4>
+              </div>
+            </a>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

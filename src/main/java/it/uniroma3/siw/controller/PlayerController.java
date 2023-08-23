@@ -4,6 +4,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.controller.validator.PlayerValidator;
 import it.uniroma3.siw.model.Club;
 import it.uniroma3.siw.model.Player;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.repository.ClubRepository;
 import it.uniroma3.siw.repository.PlayerRepository;
 import it.uniroma3.siw.service.PlayerService;
@@ -133,5 +134,17 @@ public class PlayerController {
         model.addAttribute("clubs", player.getClubs());
 
         return "admin/formUpdatePlayer.html";
+    }
+
+    @GetMapping("/admin/deletePlayer/{playerId}")
+    public String deletePlayer(Model model, @PathVariable("playerId") Long playerId){
+        Player player = this.playerRepository.findById(playerId).get();
+
+        for (Club club : player.getClubs()) {
+            club.getStarredRomaPlayers().remove(player);
+        }
+
+        this.playerRepository.delete(player);
+        return this.showAllPlayers(model);
     }
 }
