@@ -2,10 +2,7 @@ package it.uniroma3.siw.service;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -93,6 +90,22 @@ public class PlayerService {
 
 
         return "player.html";
+    }
+
+    @Transactional
+    public Collection<Player> getPlayersOrderedByAverageRating() {
+
+        Collection<Player> players = this.playerRepository.findPlayersOrderByAverageRating();
+
+        Collection<Player> orderedPlayers = new ArrayList<>();
+
+        for (Player player : players) {
+
+            orderedPlayers.add(player);
+
+        }
+
+        return orderedPlayers;
     }
 
     @Transactional

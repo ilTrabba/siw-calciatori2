@@ -102,9 +102,6 @@ input:hover {
     margin: 0;
 }
 
-
-/*da qui gestione bottone remove player*/
-
 .log {
     text-decoration: none;
 }
@@ -143,4 +140,11 @@ input:hover {
     cursor: pointer;
     z-index: 2;
     /* Ensure the button is on top of the overlay */
+}
+
+
+.sortButton{
+    position: absolute;
+    right: 125px;
+    top: 150px;
 }

@@ -27,5 +27,12 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
     @Query("SELECT COALESCE(AVG(r.rating), 0) FROM Review r WHERE r.reviewedPlayer = :player")
     public Float getAvgRatingByPlayer(@Param("player") Player player);
 
+    @Query("SELECT p\n" +
+            "FROM Player p\n" +
+            "LEFT JOIN Review r ON r.reviewedPlayer.id = p.id\n" +
+            "GROUP BY p.id\n" +
+            "ORDER BY COALESCE(AVG(r.rating), 0) DESC")
+    List<Player> findPlayersOrderByAverageRating();
+
 
 }

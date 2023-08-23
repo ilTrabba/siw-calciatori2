@@ -79,6 +79,12 @@ public class PlayerController {
         return "players.html";
     }
 
+    @GetMapping("/orderedPlayers")
+    public String showAllPlayersOrdered(Model model) {
+        model.addAttribute("players", this.playerService.getPlayersOrderedByAverageRating());
+        return "players.html";
+    }
+
     @GetMapping("/players/{playerId}")
     public String getPlayer(Model model, @PathVariable("playerId") Long id) {
         Player player = this.playerRepository.findById(id).get();
