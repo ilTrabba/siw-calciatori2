@@ -40,6 +40,7 @@
   <div class="player-content">
     <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname}">Francesco Totti, detto ER PUPONE</h1>
     <p th:text="${player.year}">Player Year Of Birth</p>
+    <p th:text="${player.description}">Player description</p>
     <button th:if="${role != null && role == 'ADMIN'}" class="update-player">
       <a th:href="'/admin/manage/' + ${player.id}" class="log">Update Player</a>
     </button>
