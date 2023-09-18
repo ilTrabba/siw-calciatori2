@@ -20,6 +20,7 @@
     <li><a href="/" class="sub">Home</a></li>
     <li><a href="/players" class="sub">Players</a></li>
     <li><a href="/clubs" class="sub">Clubs</a></li>
+    <li th:if="${userDetails}"><a href="/favoritePlayers" class="sub">Favorites</a></li>
   </ul>
   <div id="lo">
       <div th:if="${userDetails}">
@@ -39,11 +40,16 @@
   </div>
   <div class="player-content">
     <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname} + ' '">Francesco Totti, detto ER PUPONE</h1>
-
+    <div th:if="${isFavorite}">
+      <a th:href="'/removeUserPlayer/' + ${player.id}">
+        <button class="non-star-button"></button>
+      </a>
+    </div>
+    <div th:unless="${isFavorite}">
       <a th:href="'/setFavoritePlayer/' + ${player.id}">
         <button class="star-button"></button>
       </a>
-
+    </div>
     <p th:text="${player.year}">Player Year Of Birth</p>
     <p th:text="${player.description}">Player description</p>
     <button th:if="${role != null && role == 'ADMIN'}" class="update-player">

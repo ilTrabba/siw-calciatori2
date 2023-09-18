@@ -167,6 +167,15 @@ public class PlayerController {
         return "admin/formUpdatePlayer.html";
     }
 
+    @GetMapping("/removeUserPlayer/{playerId}")
+    public String removeUserPlayer(Model model, @PathVariable("playerId") Long playerId) {
+        Player player = this.playerRepository.findById(playerId).get();
+        User user = this.credentialsService.getCredentials(this.globalController.getUser().getUsername()).getUser();
+        this.userService.removePlayerToUser(player,user);
+
+        return this.playerService.function(model, player, this.globalController.getUser());
+    }
+
     @GetMapping("/admin/deletePlayer/{playerId}")
     public String deletePlayer(Model model, @PathVariable("playerId") Long playerId){
         Player player = this.playerRepository.findById(playerId).get();

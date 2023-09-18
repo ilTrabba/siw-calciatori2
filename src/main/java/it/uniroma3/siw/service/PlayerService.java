@@ -27,6 +27,9 @@ public class PlayerService {
     @Autowired
     ImageRepository imageRepository;
 
+    @Autowired
+    CredentialsService credentialsService;
+
     @Transactional
     public void createPlayer(Player player, MultipartFile image) throws IOException {
         Image playerImg = new Image(image.getBytes());
@@ -84,7 +87,7 @@ public class PlayerService {
         }
         model.addAttribute("review", new Review());
         model.addAttribute("reviews", player.getReviews());
-
+        model.addAttribute("isFavorite", player.getUsers().contains(credentialsService.getCredentials(user.getUsername()).getUser()));
 
         return "player.html";
     }

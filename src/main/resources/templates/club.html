@@ -18,6 +18,7 @@
         <li><a href="/" class="sub">Home</a></li>
         <li><a href="/players" class="sub">Players</a></li>
         <li><a href="/clubs" class="sub">Clubs</a></li>
+        <li th:if="${userDetails}"><a href="/favoritePlayers" class="sub">Favorites</a></li>
     </ul>
     <div id="lo">
         <div th:if="${userDetails}">

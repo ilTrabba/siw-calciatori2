@@ -52,4 +52,14 @@ public class UserService {
         this.userRepository.save(user);
         this.playerRepository.save(player);
     }
+
+    @Transactional
+    public void removePlayerToUser(Player player, User user) {
+
+        user.getPlayers().remove(player);
+        player.getUsers().remove(user);
+
+        this.userRepository.save(user);
+        this.playerRepository.save(player);
+    }
 }
