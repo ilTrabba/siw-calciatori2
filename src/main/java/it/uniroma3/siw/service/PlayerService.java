@@ -87,7 +87,10 @@ public class PlayerService {
         }
         model.addAttribute("review", new Review());
         model.addAttribute("reviews", player.getReviews());
-        model.addAttribute("isFavorite", player.getUsers().contains(credentialsService.getCredentials(user.getUsername()).getUser()));
+        User utente = credentialsService.getCredentials(user.getUsername()).getUser();
+
+        model.addAttribute("isFavorite", utente !=null && player.getUsers().contains(utente));
+
 
         return "player.html";
     }
