@@ -4,6 +4,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.controller.validator.ClubValidator;
 import it.uniroma3.siw.model.Club;
 import it.uniroma3.siw.model.Image;
+import it.uniroma3.siw.model.Player;
 import it.uniroma3.siw.repository.ClubRepository;
 import it.uniroma3.siw.repository.ImageRepository;
 import jakarta.validation.Valid;
@@ -82,5 +83,17 @@ public class ClubController {
             model.addAttribute("clubs", this.clubRepository.findByName(name));
         }
         return "clubs.html";
+    }
+
+    @GetMapping("/admin/deleteClub/{clubId}")
+    public String deleteClub(Model model, @PathVariable("clubId") Long clubId){
+        Club club = this.clubRepository.findById(clubId).get();
+
+        for (Player player : club.getStarredRomaPlayers()) {
+            player.getClubs().remove(club);
+        }
+
+        this.clubRepository.delete(club);
+        return this.showAllClubs(model);
     }
 }
