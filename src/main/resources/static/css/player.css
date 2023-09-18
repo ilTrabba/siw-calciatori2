@@ -180,19 +180,20 @@
 
 /*bottone stella esdrongo*/
 .star-button {
-    background-color: #FFD700; /* Colore di sfondo */
+    background: none;
     color: #333; /* Colore del testo */
     border: none; /* Rimuovi il bordo del bottone */
     padding: 10px 20px; /* Spaziatura interna */
-    font-size: 16px; /* Dimensione del testo */
+    font-size: 50px; /* Dimensione del testo */
     cursor: pointer; /* Cambia il cursore al passaggio del mouse */
     position: relative; /* Posizione relativa per i punti di angolo */
-    overflow: hidden; /* Nascondi eventuali punti che escono dalla forma */
+    margin-bottom: 15px;
+
 }
 
 .star-button::before {
     content: "\2605"; /* Codice unicode per una stella piena */
-    font-size: 24px; /* Dimensione della stella */
+    font-size: 50px; /* Dimensione della stella */
     position: absolute; /* Posizione assoluta rispetto al bottone */
     top: 50%; /* Metti la stella nel mezzo verticalmente */
     left: 50%; /* Metti la stella nel mezzo orizzontalmente */

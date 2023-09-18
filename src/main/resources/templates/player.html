@@ -40,7 +40,9 @@
   <div class="player-content">
     <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname} + ' '">Francesco Totti, detto ER PUPONE</h1>
 
-      <a th:href="'/setFavoritePlayer/' + ${player.id}">Preferiti</a>
+      <a th:href="'/setFavoritePlayer/' + ${player.id}">
+        <button class="star-button"></button>
+      </a>
 
     <p th:text="${player.year}">Player Year Of Birth</p>
     <p th:text="${player.description}">Player description</p>
