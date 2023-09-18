@@ -4,16 +4,13 @@ package it.uniroma3.siw.service;
 import java.io.IOException;
 import java.util.*;
 
+import it.uniroma3.siw.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.uniroma3.siw.model.Player;
-import it.uniroma3.siw.model.Review;
-import it.uniroma3.siw.model.Club;
-import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.repository.ClubRepository;
 import it.uniroma3.siw.repository.ImageRepository;
 import it.uniroma3.siw.repository.PlayerRepository;
@@ -106,6 +103,11 @@ public class PlayerService {
         }
 
         return orderedPlayers;
+    }
+
+    @Transactional
+    public Collection<Player> findUserPlayers( User user){
+        return  user.getPlayers();
     }
 
     @Transactional

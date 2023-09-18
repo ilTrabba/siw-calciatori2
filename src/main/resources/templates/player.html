@@ -38,7 +38,10 @@
     <!--<img th:src="@{'data:image/*;base64,'+${player.image.base64Image}}">-->
   </div>
   <div class="player-content">
-    <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname}">Francesco Totti, detto ER PUPONE</h1>
+    <h1 th:text="${player.name} + ' ' + ${player.surname} + ', detto ' + ${player.nickname} + ' '">Francesco Totti, detto ER PUPONE</h1>
+
+      <a th:href="'/setFavoritePlayer/' + ${player.id}">Preferiti</a>
+
     <p th:text="${player.year}">Player Year Of Birth</p>
     <p th:text="${player.description}">Player description</p>
     <button th:if="${role != null && role == 'ADMIN'}" class="update-player">

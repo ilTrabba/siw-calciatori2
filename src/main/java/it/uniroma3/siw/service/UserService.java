@@ -1,7 +1,11 @@
 package it.uniroma3.siw.service;
 
 
+import it.uniroma3.siw.controller.PlayerController;
+import it.uniroma3.siw.model.Club;
+import it.uniroma3.siw.model.Player;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.PlayerRepository;
 import it.uniroma3.siw.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     protected UserRepository userRepository;
+
+    @Autowired
+    protected PlayerRepository playerRepository;
 
     @Transactional
     public User getUser(Long id) {
@@ -34,5 +41,15 @@ public class UserService {
         for(User user : iterable)
             result.add(user);
         return result;
+    }
+
+    @Transactional
+    public void setPlayerToUser(User user, Player player) {
+
+        user.getPlayers().add(player);
+        player.getUsers().add(user);
+
+        this.userRepository.save(user);
+        this.playerRepository.save(player);
     }
 }

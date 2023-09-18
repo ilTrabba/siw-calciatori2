@@ -5,9 +5,12 @@ import it.uniroma3.siw.controller.validator.PlayerValidator;
 import it.uniroma3.siw.model.Club;
 import it.uniroma3.siw.model.Player;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ClubRepository;
 import it.uniroma3.siw.repository.PlayerRepository;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.PlayerService;
+import it.uniroma3.siw.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,12 @@ public class PlayerController {
     private PlayerValidator playerValidator;
     @Autowired
     private GlobalController globalController;
+
+    @Autowired
+    private CredentialsService credentialsService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/admin/formNewPlayer")
     public String newPlayer(Model model) {
@@ -85,6 +94,13 @@ public class PlayerController {
         return "players.html";
     }
 
+    @GetMapping("/favoritePlayers")
+    public String showFavoritePlayers(Model model) {
+        User user = this.credentialsService.getCredentials(this.globalController.getUser().getUsername()).getUser();
+        model.addAttribute("players", this.playerService.findUserPlayers(user));
+        return "players.html";
+    }
+
     @GetMapping("/players/{playerId}")
     public String getPlayer(Model model, @PathVariable("playerId") Long id) {
         Player player = this.playerRepository.findById(id).get();
@@ -129,6 +145,15 @@ public class PlayerController {
         model.addAttribute("clubs", player.getClubs());
 
         return "admin/formUpdatePlayer.html";
+    }
+
+    @GetMapping("/setFavoritePlayer/{playerId}")
+    public String setFavoritePlayerToUser(Model model, @PathVariable("playerId") Long playerId) {
+        Player player = this.playerRepository.findById(playerId).get();
+        User user = this.credentialsService.getCredentials(this.globalController.getUser().getUsername()).getUser();
+        this.userService.setPlayerToUser(user, player);
+
+        return this.playerService.function(model, player, this.globalController.getUser());
     }
 
     @GetMapping("/admin/manage/removeClub/{playerId}/{clubId}")

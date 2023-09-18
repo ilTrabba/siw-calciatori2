@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,9 @@ public class User {
     private String surname;
     @NotBlank
     private String email;
+
+    @ManyToMany
+    private Set<Player> userPlayers;
 
     public Long getId() {
         return id;
@@ -49,6 +53,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Player> getPlayers() {
+        return userPlayers;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.userPlayers = players;
     }
 
     @Override

@@ -47,6 +47,9 @@ public class Player {
     @OneToMany (mappedBy = "reviewedPlayer",cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
+    @ManyToMany(mappedBy = "userPlayers")
+    private Set<User> users;
+
     public Long getId() {
         return id;
     }
@@ -122,6 +125,14 @@ public class Player {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override
